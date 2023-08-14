@@ -19,14 +19,13 @@ typedef struct disciplina Disciplina;
 
 Aluno leAluno(int aulasMinistradas);
 void leAlunos(Disciplina *disc);
-void imprimeStatus(Disciplina disc);
+void imprimeStatus(Aluno aluno);
 
 int main(){
     Disciplina labprog;
     printf("Digite o numero de aulas dessa disciplina: ");
     scanf("%d", &(labprog.aulasMinistradas));
     leAlunos(&labprog);
-    imprimeStatus(labprog);
 
     return 0;
 }
@@ -34,12 +33,18 @@ int main(){
 Aluno leAluno(int aulasMinistradas){
     Aluno aluno;
     float porcentAulas;
-    printf("\nDigite a nota 1 do aluno: ");
-    scanf("%f", &(aluno.nota1));
+    do{
+    	printf("\nDigite a nota 1 do aluno: ");
+    	scanf("%f", &(aluno.nota1));
+    }while(aluno.nota1 > 10 || aluno.nota1 < 0);
+    do{
     printf("Digite a nota 2 do aluno: ");
     scanf("%f", &(aluno.nota2));
+    }while(aluno.nota2 > 10 || aluno.nota2 < 0);
+    do{
     printf("Digite o numero de aulas assistidas do aluno: ");
     scanf("%d", &(aluno.aulasAssistidas));
+    }while(aluno.aulasAssistidas > aulasMinistradas || aluno.aulasAssistidas < 0);
     aluno.media = (aluno.nota1 + aluno.nota2)/2.0;
     porcentAulas = (float)aluno.aulasAssistidas/aulasMinistradas;
     if(aluno.media >= 6.0 && porcentAulas >= 0.75){
@@ -54,16 +59,15 @@ Aluno leAluno(int aulasMinistradas){
 void leAlunos(Disciplina *disc){
     for(int i = 0; i < 5; i++){
         disc->vet[i] = leAluno(disc->aulasMinistradas);
+	imprimeStatus(disc->vet[i]);
     }
 }
 
-void imprimeStatus(Disciplina disc){
-    for (int i = 0; i < 5; i++){
-        if(disc.vet[i].status == 'a'){
-            printf("Aluno %d: Aprovado com media %f\n", i+1, disc.vet[i].media);
-        }
-        else{
-            printf("Aluno %d: Reprovado com media %f\n", i+1, disc.vet[i].media);
-        }
-    }
+void imprimeStatus(Aluno aluno){
+	if(aluno.status == 'a'){
+		printf("Aluno aprovado com media %f\n", aluno.media);
+	}
+	else{
+		printf("Aluno reprovado com media %f\n", aluno.media);
+	}
 }

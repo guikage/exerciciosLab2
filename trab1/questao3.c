@@ -35,12 +35,13 @@ void tipoTriangulo(Triangulo *tri){
 
 int main(){
     Triangulo tri;
+    printf("Digite os lados do triangulo: ");
     scanf("%d %d %d", &(tri.ladoA), &(tri.ladoB), &(tri.ladoC));
 
     tri.ehTriangulo = verTriangulo(tri);
-    printf("\n%d", tri.ehTriangulo);
     tipoTriangulo(&tri);
-    printf("\n%s", tri.tipo);
+    if (tri.ehTriangulo) printf("\nEh um triangulo %s.", tri.tipo);
+    else printf("\nNao eh um triangulo.");
 
     return 0;
 }
