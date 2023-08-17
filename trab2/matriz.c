@@ -18,10 +18,12 @@ void desaloca_matriz (int m, char** mat){
 }
 
 void preenche_matriz (int m, int n, char **mat){
-    int i = 0, j = 0, enter = 0;
+    int i, j, enter = 0;
     char aux;
     getchar();
+    i = 0;
     while(i < m){
+        j = 0;
         while(j < n){
             if(enter == 0){
                 aux = getchar();
