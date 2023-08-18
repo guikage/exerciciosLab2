@@ -1,8 +1,17 @@
 #ifndef _busca_h_
 #define _busca_h_
 
-int pegastring(char **str);
-int procura_letra(int posinicial, char **mat, int m, int n, char *str, int tam);
-int determina_dir(int pos, char **mat, int m, int n, char *str, int tam);
+struct palavra{
+    char *str;
+    int tam, dir;
+    int pini[2];
+    int pfinal[2];
+};
+typedef struct palavra Palavra;
+
+void clearbuffer();
+int pegastring(Palavra *p);
+int determina_dir(char **mat, int m, int n, Palavra *p);
+int procura_palavra(char **mat, int m, int n, Palavra *p);
 
 #endif

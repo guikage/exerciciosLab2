@@ -9,7 +9,7 @@ float area;
 };
 typedef struct retangulo Retangulo;
 
-void calculaPeriArea(Retangulo *ret);
+void calculaPeriArea(Retangulo ret);
 void leBaseAltura(Retangulo *ret);
 
 int main(){
@@ -17,7 +17,7 @@ int main(){
     Retangulo ret[5];
     for (i = 0; i < 5; i++){
         leBaseAltura(&(ret[i]));
-        calculaPeriArea(&(ret[i]));
+        calculaPeriArea(ret[i]);
     }
     return 0;
 }
@@ -29,9 +29,9 @@ void leBaseAltura(Retangulo *ret){
     scanf("%f", &(ret->altura));
 }
 
-void calculaPeriArea(Retangulo *ret){
-    ret->area = ret->base * ret->altura;
-    ret->perimetro = 2*ret->base + 2*ret->altura;
+void calculaPeriArea(Retangulo ret){
+    ret.area = ret.base * ret.altura;
+    ret.perimetro = 2*ret.base + 2*ret.altura;
 
-    printf("Perimetro: %.2f\nArea: %.2f\n", ret->perimetro, ret->area);
+    printf("Perimetro: %.2f\nArea: %.2f\n", ret.perimetro, ret.area);
 }

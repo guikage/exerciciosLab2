@@ -35,7 +35,7 @@ void tipoTriangulo(Triangulo *tri){
 
 int main(){
     Triangulo tri;
-    printf("Digite os lados do triangulo: ");
+    printf("Digite os lados do triangulo:\n");
     scanf("%d %d %d", &(tri.ladoA), &(tri.ladoB), &(tri.ladoC));
 
     tri.ehTriangulo = verTriangulo(tri);

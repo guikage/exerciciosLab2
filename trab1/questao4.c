@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define TAM 5
+#define TAM 50
 
 struct usuario
 {

@@ -44,6 +44,7 @@ void preenche_matriz (int m, int n, char **mat){
 }
 
 void mostra_matriz (int m, int n, char **mat){
+    putchar('\n');
     for(int i = 0; i < m; i++){
         for(int j = 0; j < n; j++){
             printf("%c ", mat[i][j]);
