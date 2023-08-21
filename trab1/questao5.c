@@ -37,10 +37,10 @@ Aluno calculaAluno(int aulasMinistradas){
     aluno.media = (aluno.nota1 + aluno.nota2)/2.0;
     porcentAulas = (float)aluno.aulasAssistidas/aulasMinistradas;
     if(aluno.media >= 6.0 && porcentAulas >= 0.75){
-        aluno.status = 'a';
+        aluno.status = 'A';
     }
     else{
-        aluno.status = 'r';
+        aluno.status = 'B';
     }
     return aluno;
 }
@@ -53,12 +53,12 @@ Aluno leAluno(int aulasMinistradas){
     	scanf("%f", &(aluno.nota1));
     }while(aluno.nota1 > 10 || aluno.nota1 < 0);
     do{
-    printf("Digite a nota 2 do aluno (0-10): ");
-    scanf("%f", &(aluno.nota2));
+        printf("Digite a nota 2 do aluno (0-10): ");
+        scanf("%f", &(aluno.nota2));
     }while(aluno.nota2 > 10 || aluno.nota2 < 0);
     do{
-    printf("Digite o numero de aulas assistidas do aluno (0-%d): ", aulasMinistradas);
-    scanf("%d", &(aluno.aulasAssistidas));
+        printf("Digite o numero de aulas assistidas do aluno (0-%d): ", aulasMinistradas);
+        scanf("%d", &(aluno.aulasAssistidas));
     }while(aluno.aulasAssistidas > aulasMinistradas || aluno.aulasAssistidas < 0);
     return aluno;
 }
@@ -66,12 +66,13 @@ Aluno leAluno(int aulasMinistradas){
 void leAlunos(Disciplina *disc){
     for(int i = 0; i < 5; i++){
         disc->vet[i] = leAluno(disc->aulasMinistradas);
+        disc->vet[i] = calculaAluno(disc->aulasMinistradas);
         imprimeStatus(disc->vet[i]);
     }
 }
 
 void imprimeStatus(Aluno aluno){
-	if(aluno.status == 'a'){
+	if(aluno.status == 'A'){
 		printf("Aluno aprovado com media %f\n", aluno.media);
 	}
 	else{

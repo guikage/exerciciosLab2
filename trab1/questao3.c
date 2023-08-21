@@ -25,7 +25,7 @@ void tipoTriangulo(Triangulo *tri){
     else if(tri->ladoA == tri->ladoB && tri->ladoA == tri->ladoC){
         strcpy(tri->tipo, "equilatero");
     }
-    else if(tri->ladoA != tri->ladoB && tri->ladoA != tri->ladoC){
+    else if(tri->ladoA != tri->ladoB && tri->ladoA != tri->ladoC && tri->ladoB != tri->ladoC){
         strcpy(tri->tipo, "escaleno");
     }
     else{
