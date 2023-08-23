@@ -18,29 +18,26 @@ void desaloca_matriz (int m, char** mat){
 }
 
 void preenche_matriz (int m, int n, char **mat){
-    int i, j, enter = 0;
-    char aux;
-    getchar();
+    int i, j, k, enter = 0;
+    char c;
+    char *aux;
+    aux = (char*)malloc(2*n*m*sizeof(char));
+    while ((c = getchar()) != '\n' && c != EOF) { }
+    fgets(aux, 2*n*m, stdin);
     i = 0;
+    k = 0;
     while(i < m){
         j = 0;
         while(j < n){
-            if(enter == 0){
-                aux = getchar();
-                putchar(aux);
-                if(aux == '\n'){
-                    enter = 1;
-                } else if (aux != ' '){
-                    mat[i][j] = aux;
-                    j++;
-                }
-            } else {
-                mat[i][j] = ' ';
+            if(aux[k] != ' '){
+                mat[i][j] = aux[k];
                 j++;
             }
+            k++;
         }
         i++;
     }
+    free(aux);
 }
 
 void mostra_matriz (int m, int n, char **mat){

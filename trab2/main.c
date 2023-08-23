@@ -10,10 +10,10 @@ int main(){
     printf("Digite as dimensoes da matriz: ");
     scanf("%d %d", &m, &n);
     mat = aloca_matriz(m, n);
+    printf("Digite a frase da matriz: ");
     preenche_matriz(m, n, mat);
     for(;;){
         mostra_matriz(m, n, mat);
-        clearbuffer();
         exit = pegastring(&p);
         if(exit){
             break;

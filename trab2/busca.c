@@ -7,13 +7,8 @@
 //591 0
 //432
 
-void clearbuffer(){
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) { }
-}
-
 int pegastring(Palavra *p){
-    printf("Digite o tamanho da string: ");
+    printf("Digite o tamanho da string (0 para encerrar): ");
     scanf("%d", &(p->tam));
     if(p->tam == 0){
         return 1;

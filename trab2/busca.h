@@ -9,7 +9,6 @@ struct palavra{
 };
 typedef struct palavra Palavra;
 
-void clearbuffer();
 int pegastring(Palavra *p);
 int determina_dir(char **mat, int m, int n, Palavra *p);
 int procura_palavra(char **mat, int m, int n, Palavra *p);
