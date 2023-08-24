@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1692826741 source:/home/guieinloft/projects/cc/exerciciosLab2/trab2/main.c
+	<stdio.h>
+	<stdlib.h>
+	"matriz.h"
+	"busca.h"
+
+1692307312 /home/guieinloft/projects/cc/exerciciosLab2/trab2/matriz.h
+
+1692750126 /home/guieinloft/projects/cc/exerciciosLab2/trab2/busca.h
+
+1692752980 source:/home/guieinloft/projects/cc/exerciciosLab2/trab2/matriz.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1692826631 source:/home/guieinloft/projects/cc/exerciciosLab2/trab2/busca.c
+	<stdio.h>
+	<stdlib.h>
+	"busca.h"
+

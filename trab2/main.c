@@ -12,16 +12,16 @@ int main(){
     mat = aloca_matriz(m, n);
     printf("Digite a frase da matriz: ");
     preenche_matriz(m, n, mat);
+    mostra_matriz(m, n, mat);
     for(;;){
-        mostra_matriz(m, n, mat);
-        exit = pegastring(&p);
+        exit = pega_string(&p);
         if(exit){
             break;
         }
         procura_palavra(mat, m, n, &p);
-        printf("\n[%d,%d] [%d,%d] %d\n", p.pini[0]+1, p.pini[1]+1, p.pfinal[0]+1, p.pfinal[1]+1, p.dir);
+        imprime_info(p);
+        free(p.str);
     }
-    free(p.str);
     desaloca_matriz(m, mat);
 
     return 0;

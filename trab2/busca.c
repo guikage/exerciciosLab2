@@ -7,21 +7,24 @@
 //591 0
 //432
 
-int pegastring(Palavra *p){
-    printf("Digite o tamanho da string (0 para encerrar): ");
+void imprime_info(Palavra p){
+    printf("\n[%d,%d] [%d,%d] %d", p.pini[0]+1, p.pini[1]+1, p.pfinal[0]+1, p.pfinal[1]+1, p.dir);
+}
+
+int pega_string(Palavra *p){
+    printf("\nDigite o tamanho da string (0 para encerrar): ");
     scanf("%d", &(p->tam));
     if(p->tam == 0){
         return 1;
     }
-    p->str = (char*)malloc(p->tam+1*sizeof(char));
+    p->str = (char*)malloc((p->tam+1)*sizeof(char));
     printf("Digite a palavra (sem espacos): ");
     scanf("%s", p->str);
     return 0;
 }
 
 int teste_horizontal(char **mat, int m, int n, int l, int c, Palavra *p){
-    int i;
-    char direta = 1, inversa = 1;
+    int i, direta = 1, inversa = 1;
     for(i = 0; i < p->tam; i++){
         if(c+i < n){
             if(mat[l][c+i] != p->str[i]){
@@ -42,7 +45,10 @@ int teste_horizontal(char **mat, int m, int n, int l, int c, Palavra *p){
     }
     p->pfinal[0] = l;
     p->pfinal[1] = c+(i-1)*direta-(i-1)*inversa;
-    return(direta+5*inversa);
+    if(direta){
+        return direta;
+    }
+    return(5*inversa);
 }
 
 int teste_vertical(char **mat, int m, int n, int l, int c, Palavra *p){
@@ -68,7 +74,10 @@ int teste_vertical(char **mat, int m, int n, int l, int c, Palavra *p){
     }
     p->pfinal[0] = l+(i-1)*direta-(i-1)*inversa;
     p->pfinal[1] = c;
-    return(3*direta+7*inversa);
+    if(direta){
+        return (3*direta);
+    }
+    return(7*inversa);
 }
 
 int teste_diag_primaria(char **mat, int m, int n, int l, int c, Palavra *p){
@@ -94,7 +103,10 @@ int teste_diag_primaria(char **mat, int m, int n, int l, int c, Palavra *p){
     }
     p->pfinal[0] = l+(i-1)*direta-(i-1)*inversa;
     p->pfinal[1] = c+(i-1)*direta-(i-1)*inversa;
-    return(2*direta+6*inversa);
+    if(direta){
+        return (2*direta);
+    }
+    return(6*inversa);
 }
 
 int teste_diag_secundaria(char **mat, int m, int n, int l, int c, Palavra *p){
@@ -120,28 +132,25 @@ int teste_diag_secundaria(char **mat, int m, int n, int l, int c, Palavra *p){
     }
     p->pfinal[0] = l+(i-1)*direta-(i-1)*inversa;
     p->pfinal[1] = c-(i-1)*direta+(i-1)*inversa;
-    return(4*direta+8*inversa);
+    if(direta){
+        return (4*direta);
+    }
+    return(8*inversa);
 }
 
 int testa_tudo(char **mat, int m, int n, int l, int c, Palavra *p){
     int dir;
     dir = teste_horizontal(mat, m, n, l, c, p);
-    if(dir != 0){
-        return dir;
+    if(dir == 0){
+        dir = teste_vertical(mat, m, n, l, c, p);
+        if(dir == 0){
+            dir = teste_diag_primaria(mat, m, n, l, c, p);
+            if(dir == 0){
+                dir = teste_diag_secundaria(mat, m, n, l, c, p);
+            }
+        }
     }
-    dir = teste_vertical(mat, m, n, l, c, p);
-    if(dir != 0){
-        return dir;
-    }
-    dir = teste_diag_primaria(mat, m, n, l, c, p);
-    if(dir != 0){
-        return dir;
-    }
-    dir = teste_diag_secundaria(mat, m, n, l, c, p);
-    if(dir != 0){
-        return dir;
-    }
-    return 0;
+    return dir;
 }
 
 int determina_dir(char **mat, int m, int n, Palavra *p){

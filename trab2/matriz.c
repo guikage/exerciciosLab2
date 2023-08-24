@@ -3,47 +3,56 @@
 #include <time.h>
 
 char** aloca_matriz (int m, int n){
+    int i;
     char **mat = (char**)malloc(m*sizeof(char*));
-    for(int i = 0; i < m; i++){
+    for(i = 0; i < m; i++){
         mat[i] = (char*)malloc(n*sizeof(char));
     }
     return mat;
 }
 
 void desaloca_matriz (int m, char** mat){
-    for(int i = 0; i < m; i++){
+    int i;
+    for(i = 0; i < m; i++){
         free(mat[i]);
     }
     free(mat);
 }
 
 void preenche_matriz (int m, int n, char **mat){
-    int i, j, k, enter = 0;
+    int i = 0, j = 0, enter = 0;
     char c;
-    char *aux;
-    aux = (char*)malloc(2*n*m*sizeof(char));
     while ((c = getchar()) != '\n' && c != EOF) { }
-    fgets(aux, 2*n*m, stdin);
-    i = 0;
-    k = 0;
     while(i < m){
-        j = 0;
         while(j < n){
-            if(aux[k] != ' '){
-                mat[i][j] = aux[k];
+            if(enter){
+                mat[i][j] = ' ';
                 j++;
             }
-            k++;
+            else{
+                c = getchar();
+                if(c == '\n'){
+                    enter = 1;
+                }
+                else if(c != ' '){
+                    mat[i][j] = c;
+                    j++;
+                }
+            }
         }
+        j = 0;
         i++;
     }
-    free(aux);
+    if(!enter){
+        while ((c = getchar()) != '\n' && c != EOF) { }
+    }
 }
 
 void mostra_matriz (int m, int n, char **mat){
+    int i, j;
     putchar('\n');
-    for(int i = 0; i < m; i++){
-        for(int j = 0; j < n; j++){
+    for(i = 0; i < m; i++){
+        for(j = 0; j < n; j++){
             printf("%c ", mat[i][j]);
         }
         putchar('\n');
