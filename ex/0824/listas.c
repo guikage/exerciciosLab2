@@ -61,12 +61,3 @@ Lista *lconcat(Lista *l1, Lista *l2){
     l1->prox = l2;
     return lc;
 }
-
-Lista *linseref(Lista *l, int v){
-    Lista *u = lultimo(l);
-    Lista *n = (Lista*)malloc(sizeof(Lista));
-    n = lcria();
-    n = linsere(n, v);
-    u->prox = n;
-    return l;
-}

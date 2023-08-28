@@ -1,3 +1,6 @@
+#ifndef _listas_
+#define _listas_
+
 struct lista{
     int valor;
     struct lista *prox;
@@ -11,4 +14,5 @@ int lmaiores(Lista *l, int v);
 Lista *lultimo(Lista *l);
 Lista *lconcat(Lista *l1, Lista *l2);
 void limprime(Lista *l);
-Lista *linseref(Lista *l, int v);
+
+#endif
