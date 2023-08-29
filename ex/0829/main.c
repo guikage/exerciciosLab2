@@ -16,10 +16,19 @@ int main(){
     l = linserei(l, -1, 3);
     l = linserei(l, lcomp(l), 2);
     l = linserei(l, 100, 7);
-    limprime(l);
+    l = lcircular(l);
+    limprimecirc(l);
     putchar('\n');
-    l = linverte(l);
-    limprime(l);
+    l = linserecirc(l, 0, 10);
+    l = linserecirc(l, -1, 1);
+    l = linserecirc(l, 4, 10);
+    limprimecirc(l);
     putchar('\n');
+    l = lremovecirc(l, 0);
+    l = lremovecirc(l, -1);
+    l = lremovecirc(l, 3);
+    limprimecirc(l);
+    putchar('\n');
+
     return 0;
 }
