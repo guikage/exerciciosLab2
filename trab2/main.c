@@ -3,6 +3,21 @@
 #include "matriz.h"
 #include "busca.h"
 
+int catch_exit(){
+    char e;
+    printf("Deseja continuar? (S/n) ");
+    scanf(" %c", &e);
+    if(e == 'n'){
+        printf("Realmente deseja sair? (s/N) ");
+        scanf(" %c", &e);
+        if(e == 's'){
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
+
 int main(){
     char **mat;
     Palavra p;
@@ -13,14 +28,12 @@ int main(){
     printf("Digite a frase da matriz: ");
     preenche_matriz(m, n, mat);
     mostra_matriz(m, n, mat);
-    for(;;){
-        exit = pega_string(&p);
-        if(exit){
-            break;
-        }
+    while(!exit){
+        pega_string(&p);
         procura_palavra(mat, m, n, &p);
         imprime_info(p);
         free(p.str);
+        exit = catch_exit();
     }
     desaloca_matriz(m, mat);
 

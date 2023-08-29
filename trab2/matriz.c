@@ -22,7 +22,7 @@ void desaloca_matriz (int m, char** mat){
 void preenche_matriz (int m, int n, char **mat){
     int i = 0, j = 0, enter = 0;
     char c;
-    while ((c = getchar()) != '\n' && c != EOF) { }
+    while((c = getchar()) != '\n' && c != EOF) { }
     while(i < m){
         while(j < n){
             if(enter){
@@ -57,5 +57,4 @@ void mostra_matriz (int m, int n, char **mat){
         }
         putchar('\n');
     }
-    putchar('\n');
 }

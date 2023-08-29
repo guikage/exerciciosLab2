@@ -7,19 +7,50 @@
 //591 0
 //432
 
+char *nome_dir(int dir){
+    switch(dir){
+        case 1:
+            return "horizontal direta";
+        case 2:
+            return "diagonal primaria direta";
+        case 3:
+            return "vertical direta";
+        case 4:
+            return "diagonal secundaria direta";
+        case 5:
+            return "horizontal inversa";
+        case 6:
+            return "diagonal primaria inversa";
+        case 7:
+            return "vertical inversa";
+        case 8:
+            return "diagonal secundaria inversa";
+        default:
+            return "indefinido";
+    }
+}
+
 void imprime_info(Palavra p){
-    printf("\n[%d,%d] [%d,%d] %d", p.pini[0]+1, p.pini[1]+1, p.pfinal[0]+1, p.pfinal[1]+1, p.dir);
+    if(p.dir == 0){
+        printf("A palavra %s nao foi encontrada.\n", p.str);
+    }
+    else if(p.dir == 9){
+        printf("O caracter %s foi encontrado na posicao [%d,%d].\n", p.str, p.pini[0]+1, p.pini[1]+1);
+    }
+    else{
+        char *nmdir = nome_dir(p.dir);
+        printf("A palavra %s foi encontrada na %s.\nEla se inicia na posicao [%d,%d] e encerra na posicao [%d,%d].\n", p.str, nmdir, p.pini[0]+1, p.pini[1]+1, p.pfinal[0]+1, p.pfinal[1]+1);
+    }
 }
 
 int pega_string(Palavra *p){
-    printf("\nDigite o tamanho da string (0 para encerrar): ");
-    scanf("%d", &(p->tam));
-    if(p->tam == 0){
-        return 1;
+    printf("\nDigite a palavra (sem espacos): ");
+    scanf("%ms", &(p->str));
+    int t = 0;
+    while(p->str[t] != '\0'){
+        t++;
     }
-    p->str = (char*)malloc((p->tam+1)*sizeof(char));
-    printf("Digite a palavra (sem espacos): ");
-    scanf("%s", p->str);
+    p->tam = t;
     return 0;
 }
 
