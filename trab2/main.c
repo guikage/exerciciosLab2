@@ -18,24 +18,33 @@ int catch_exit(){
     return 0;
 }
 
+char **pega_matriz(int *m, int *n){
+    printf("Digite as dimensoes da matriz: ");
+    scanf("%d %d", m, n);
+    char **mat = aloca_matriz(*m, *n);
+    printf("Digite a frase da matriz: ");
+    preenche_matriz(*m, *n, mat);
+    printf("deu certo");
+    return mat;
+}
+
+int mainloop(char **mat, int m, int n, Palavra *p){
+    pega_string(p);
+    procura_palavra(mat, m, n, p);
+    imprime_info(*p);
+    free(p->str);
+    return catch_exit();
+}
+
 int main(){
     char **mat;
     Palavra p;
     int m, n, exit;
-    printf("Digite as dimensoes da matriz: ");
-    scanf("%d %d", &m, &n);
-    mat = aloca_matriz(m, n);
-    printf("Digite a frase da matriz: ");
-    preenche_matriz(m, n, mat);
+    mat = pega_matriz(&m, &n);
     mostra_matriz(m, n, mat);
     while(!exit){
-        pega_string(&p);
-        procura_palavra(mat, m, n, &p);
-        imprime_info(p);
-        free(p.str);
-        exit = catch_exit();
+        exit = mainloop(mat, m, n, &p);
     }
     desaloca_matriz(m, mat);
-
     return 0;
 }
