@@ -24,7 +24,6 @@ char **pega_matriz(int *m, int *n){
     char **mat = aloca_matriz(*m, *n);
     printf("Digite a frase da matriz: ");
     preenche_matriz(*m, *n, mat);
-    printf("deu certo");
     return mat;
 }
 

@@ -5,8 +5,16 @@
 char** aloca_matriz (int m, int n){
     int i;
     char **mat = (char**)malloc(m*sizeof(char*));
+    if(mat == NULL){
+        printf("Ocorreu um erro. Encerrando o programa.\n");
+        exit(1);
+    }
     for(i = 0; i < m; i++){
         mat[i] = (char*)malloc(n*sizeof(char));
+        if(mat[i] == NULL){
+            printf("Ocorreu um erro. Encerrando o programa.\n");
+            exit(1);
+        }
     }
     return mat;
 }
