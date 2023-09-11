@@ -4,24 +4,27 @@
 #include "datas.h"
 #include "carros.h"
 #include "clientes.h"
+#include "locacao.h"
 
 int main(){
+    LCarros *lcarros = NULL;
     LClientes *lclientes = NULL;
-    Cliente *clientea = NULL;
-    for(int i = 0; i < 3; i++){
+    LLocacoes *llocacoes = NULL;
+    for(int i = 0; i < 2; i++){
+        lcarros = insereCarro(lcarros);
+        listaCarros(lcarros);
+    }
+    for(int i = 0; i < 2; i++){
         lclientes = insereCliente(lclientes);
         listaClientes(lclientes);
     }
-    int cnh;
-    printf("\nDIGITE A CNH:\n");
-    while(true){
-        scanf("%d", &cnh);
-        clientea = buscaCliente(lclientes, cnh);
-        if(clientea != NULL){
-            printf("%d\n", clientea->cnh);
-        } else {
-            printf("NAO ENCONTRADO\n");
-        }
+    for(int i = 0; i < 3; i++){
+        llocacoes = insereLocacao(llocacoes, lcarros, lclientes);
+        listaLocacoes(llocacoes);
+    }
+    for(int i = 0; i < 3; i++){
+        encerraLocacao(llocacoes);
+        listaLocacoes(llocacoes);
     }
     return 0;
 }

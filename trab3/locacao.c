@@ -21,15 +21,23 @@ Locacao *pegaLocacao(LCarros *lcarros, LClientes *lclientes){
         scanf(" %s", placa);
         locacao->carro = buscaCarro(lcarros, placa);
     }while(locacao->carro == NULL);
+    if(!locacao->carro->disponivel){
+        printf("Carro nao esta disponivel");
+        return NULL;
+    }
     printf("Insira as informacoes da data de retirada:\n");
     locacao->dini = pegaData();
     locacao->carro->disponivel = false;
+    locacao->vtotal = 0.0;
     return locacao;
 }
 
 LLocacoes *insereLocacao(LLocacoes *l, LCarros *lcarros, LClientes *lclientes){
     LLocacoes *n = (LLocacoes*)malloc(sizeof(LLocacoes));
     n->locacao = pegaLocacao(lcarros, lclientes);
+    if(n->locacao == NULL){
+        return l;
+    }
     n->prox = l;
     return n;
 }
@@ -51,14 +59,34 @@ void encerraLocacao(LLocacoes *l){
     scanf(" %s", placa);
     Locacao *loc = buscaLocacao(l, placa);
     if(loc == NULL){
-        printf("Carro nao existe e/ou nao foi locado.");
+        printf("Carro nao existe e/ou nao foi locado.\n");
         return;
     }
-    if(!loc->carro->disponivel){
-        printf("Carro nao possui nenhuma locacao aberta.");
+    if(loc->carro->disponivel){
+        printf("Carro nao possui nenhuma locacao aberta.\n");
         return;
     }
     loc->carro->disponivel = false;
     loc->dfin = pegaData();
-    loc->vtotal = difdata(loc->dini, loc->dfin) * loc->carro->valorDiaria;
+    loc->vtotal = (difdata(loc->dini, loc->dfin) + 1) * loc->carro->valorDiaria;
+    printf("Digite a quilometragem atual do carro:\n");
+    scanf(" %f", loc->carro->quilometragem);
+}
+
+void listaLocacoes(LLocacoes *l){
+    LLocacoes *p = l;
+    while(p != NULL){
+        printf("\nLOCACAO:\n");
+        printf("\tPlaca do carro: %s\n", p->locacao->carro->placa);
+        printf("\tCNH do cliente: %d\n", p->locacao->cliente->cnh);
+        printf("\tData de retirada: %02d/%02d/%04d\n", p->locacao->dini.dia, p->locacao->dini.mes, p->locacao->dini.ano);
+        if(p->locacao->vtotal != 0.0){
+            printf("\tData de devolucao: %02d/%02d/%04d\n", p->locacao->dfin.dia, p->locacao->dfin.mes, p->locacao->dfin.ano);
+            printf("\tValor final: %.2f\n", p->locacao->vtotal);
+        }
+        else{
+            printf("\tCARRO NAO FOI DEVOLVIDO AINDA\n");
+        }
+        p = p->prox;
+    }
 }

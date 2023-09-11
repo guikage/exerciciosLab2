@@ -20,5 +20,10 @@ struct llocacoes{
 };
 typedef struct llocacoes LLocacoes;
 
+Locacao *pegaLocacao(LCarros *lcarros, LClientes *lclientes);
+LLocacoes *insereLocacao(LLocacoes *l, LCarros *lcarros, LClientes *lclientes);
+Locacao *buscaLocacao(LLocacoes *l, char *placa);
+void encerraLocacao(LLocacoes *l);
+void listaLocacoes(LLocacoes *l);
 
 #endif
