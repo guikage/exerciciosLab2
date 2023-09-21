@@ -22,7 +22,8 @@ struct lcarros{
 typedef struct lcarros LCarros;
 
 LCarros *insereCarro(LCarros *l);
-void *listaCarros(LCarros *l);
+void listaCarro(Carro *carro);
+void listaCarros(LCarros *l);
 Carro *buscaCarro(LCarros *l, char *placa);
 
 #endif

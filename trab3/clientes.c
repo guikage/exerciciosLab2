@@ -22,7 +22,13 @@ LClientes *insereCliente(LClientes *l){
     return n;
 }
 
-void *listaClientes(LClientes *l){
+void listaCliente(Cliente *cliente){
+    printf("\n%s:\n", cliente->nome);
+    printf("\tCNH: %d\n", cliente->cnh);
+    printf("\tTelefone: %d\n", cliente->telefone);
+}
+
+void listaClientes(LClientes *l){
     LClientes *p = l;
     while(p != NULL){
         printf("\n%s:\n", p->cliente->nome);

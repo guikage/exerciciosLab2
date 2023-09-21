@@ -16,7 +16,8 @@ typedef struct lclientes LClientes;
 
 Cliente *pegaCliente(void);
 LClientes *insereCliente(LClientes *l);
-void *listaClientes(LClientes *l);
+void listaClientes(LClientes *l);
+void listaCliente(Cliente *cliente);
 Cliente *buscaCliente(LClientes *l, int cnh);
 
 #endif

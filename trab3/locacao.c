@@ -11,16 +11,19 @@ bool confereSolicitacao(LLocacoes *lista, Locacao *loc){
     LLocacoes *p = lista;
     while(p != NULL){
         if(p->locacao->carro == loc->carro){
-            if(difdata(loc->dini, p->locacao->dini) >= 0 && (difdata(loc->dini, p->locacao->dfin) <= 0 || !loc->carro->disponivel)){
+            if(!loc->carro->disponivel){
+                return false;
+            }
+            if(difdata(loc->dini, p->locacao->dini) <= 0 && difdata(loc->dini, p->locacao->dfin) >= 0){
                 return false;
             }
         }
-        p->prox;
+        p = p->prox;
     }
     return true;
 }
 
-Locacao *pegaLocacao(LCarros *lcarros, LClientes *lclientes){
+Locacao *pegaLocacao(LLocacoes *lloc, LCarros *lcarros, LClientes *lclientes){
     Locacao *locacao = (Locacao*)malloc(sizeof(Locacao));
     int cnh;
     char placa[8];
@@ -36,7 +39,7 @@ Locacao *pegaLocacao(LCarros *lcarros, LClientes *lclientes){
     }while(locacao->carro == NULL);
     printf("Insira as informacoes da data de retirada:\n");
     locacao->dini = pegaData();
-    if(!confereSolicitacao){
+    if(!confereSolicitacao(lloc, locacao)){
         printf("Carro nao esta disponivel na data solicitada.\n");
         return NULL;
     }
@@ -48,7 +51,7 @@ Locacao *pegaLocacao(LCarros *lcarros, LClientes *lclientes){
 
 LLocacoes *insereLocacao(LLocacoes *l, LCarros *lcarros, LClientes *lclientes){
     LLocacoes *n = (LLocacoes*)malloc(sizeof(LLocacoes));
-    n->locacao = pegaLocacao(lcarros, lclientes);
+    n->locacao = pegaLocacao(l, lcarros, lclientes);
     if(n->locacao == NULL){
         return l;
     }
@@ -80,10 +83,10 @@ void encerraLocacao(LLocacoes *l){
         printf("Carro nao possui nenhuma locacao aberta.\n");
         return;
     }
-    loc->carro->disponivel = false;
+    loc->carro->disponivel = true;
     printf("Insira as informacoes da data de devolucao:\n");
     loc->dfin = pegaData();
-    while(difdata(loc->dfin, loc->dini) < 0){
+    while(difdata(loc->dfin, loc->dini) > 0){
         printf("Data informada antecede a data de retirada.\n");
         loc->dfin = pegaData();
     }
@@ -92,20 +95,24 @@ void encerraLocacao(LLocacoes *l){
     scanf(" %f", loc->carro->quilometragem);
 }
 
+void listaLocacao(Locacao *locacao){
+    printf("\nLOCACAO:\n");
+    printf("\tPlaca do carro: %s\n", locacao->carro->placa);
+    printf("\tCNH do cliente: %d\n", locacao->cliente->cnh);
+    printf("\tData de retirada: %02d/%02d/%04d\n", locacao->dini.dia, locacao->dini.mes, locacao->dini.ano);
+    if(locacao->vtotal != 0.0){
+        printf("\tData de devolucao: %02d/%02d/%04d\n", locacao->dfin.dia, locacao->dfin.mes, locacao->dfin.ano);
+        printf("\tValor final: %.2f\n", locacao->vtotal);
+    }
+    else{
+        printf("\tCARRO NAO FOI DEVOLVIDO AINDA\n");
+    }
+}
+
 void listaLocacoes(LLocacoes *l){
     LLocacoes *p = l;
     while(p != NULL){
-        printf("\nLOCACAO:\n");
-        printf("\tPlaca do carro: %s\n", p->locacao->carro->placa);
-        printf("\tCNH do cliente: %d\n", p->locacao->cliente->cnh);
-        printf("\tData de retirada: %02d/%02d/%04d\n", p->locacao->dini.dia, p->locacao->dini.mes, p->locacao->dini.ano);
-        if(p->locacao->vtotal != 0.0){
-            printf("\tData de devolucao: %02d/%02d/%04d\n", p->locacao->dfin.dia, p->locacao->dfin.mes, p->locacao->dfin.ano);
-            printf("\tValor final: %.2f\n", p->locacao->vtotal);
-        }
-        else{
-            printf("\tCARRO NAO FOI DEVOLVIDO AINDA\n");
-        }
+        listaLocacao(p->locacao);
         p = p->prox;
     }
 }

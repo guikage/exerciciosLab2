@@ -29,7 +29,21 @@ LCarros *insereCarro(LCarros *l){
     return n;
 }
 
-void *listaCarros(LCarros *l){
+void listaCarro(Carro *carro){
+    printf("\nPLACA %s:\n", carro->placa);
+    printf("\tMarca: %s\n", carro->marca);
+    printf("\tModelo: %s\n", carro->modelo);
+    printf("\tAno de fab.: %d\n", carro->anoFabricacao);
+    printf("\tQuilometragem: %.2f\n", carro->quilometragem);
+    printf("\tValor da diaria: %.2f\n", carro->valorDiaria);
+    if(carro->disponivel){
+        printf("\tDISPONIVEL\n");
+    } else {
+        printf("\tINDISPONIVEL\n");
+    }
+}
+
+void listaCarros(LCarros *l){
     LCarros *p = l;
     while(p != NULL){
         printf("\nPLACA %s:\n", p->carro->placa);
