@@ -37,6 +37,10 @@ Locacao *pegaLocacao(LLocacoes *lloc, LCarros *lcarros, LClientes *lclientes){
         scanf(" %s", placa);
         locacao->carro = buscaCarro(lcarros, placa);
     }while(locacao->carro == NULL);
+    if(!locacao->carro->disponivel){
+        printf("Carro nao esta disponivel para locacao.\n");
+        return NULL;
+    }
     printf("Insira as informacoes da data de retirada:\n");
     locacao->dini = pegaData();
     if(!confereSolicitacao(lloc, locacao)){
@@ -92,7 +96,7 @@ void encerraLocacao(LLocacoes *l){
     }
     loc->vtotal = (difdata(loc->dini, loc->dfin) + 1) * loc->carro->valorDiaria;
     printf("Digite a quilometragem atual do carro:\n");
-    scanf(" %f", loc->carro->quilometragem);
+    scanf(" %f", &loc->carro->quilometragem);
 }
 
 void listaLocacao(Locacao *locacao){

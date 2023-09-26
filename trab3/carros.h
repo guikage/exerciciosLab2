@@ -6,8 +6,8 @@
 
 struct carro{
     char placa[8];
-    char *marca;
-    char *modelo;
+    char marca[20];
+    char modelo[20];
     int anoFabricacao;
     float quilometragem;
     float valorDiaria;

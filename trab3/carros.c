@@ -7,11 +7,14 @@
 Carro *pegaCarro(void){
     Carro *carro = (Carro*)malloc(sizeof(Carro));
     printf("Digite a placa do carro:\n");
-    scanf(" %s", carro->placa);
+    scanf(" %7s", carro->placa);
     printf("Digite a marca do carro:\n");
-    scanf(" %ms", &carro->marca);
+    while(getchar() != '\n'); //limpa o buffer
+    fgets(carro->marca, 20, stdin);
+    carro->marca[strcspn(carro->marca, "\n")] = 0; //remove '\n'
     printf("Digite o modelo do carro:\n");
-    scanf(" %ms", &carro->modelo);
+    fgets(carro->modelo, 20, stdin);
+    carro->modelo[strcspn(carro->modelo, "\n")] = 0; //remove '\n'
     printf("Digite o ano de fabricacao do carro:\n");
     scanf(" %d", &(carro->anoFabricacao));
     printf("Digite a quilometragem do carro:\n");

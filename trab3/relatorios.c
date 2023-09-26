@@ -24,7 +24,7 @@ void r2(LLocacoes *l){
     LLocacoes *p = l;
     while(p != NULL){
         if(p->locacao->cliente->cnh == cnh){
-            listaCliente(p->locacao->cliente);
+            listaLocacao(p->locacao);
         }
         p = p->prox;
     }
