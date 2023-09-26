@@ -6,7 +6,7 @@
 struct fila{
     int lista[50];
     int ini;
-    int fim;
+    int n;
 };
 typedef struct fila Fila;
 

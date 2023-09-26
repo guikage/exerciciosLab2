@@ -41,7 +41,7 @@ int main(){
     }
     fila_imprime(f1);
     fila_imprime(f2);
-    fila_combina(f1, f2, f3);
+    f3 = ordena(f1, f2);
     fila_imprime(f3);
 
     return 0;

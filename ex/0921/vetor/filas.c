@@ -6,21 +6,24 @@
 Fila *fila_cria(void){
     Fila *fila = (Fila*)malloc(sizeof(Fila));
     fila->ini = 0;
-    fila->fim = 0;
+    fila->n = 0;
     return fila;
 }
 
 void fila_insere(Fila *fila, int valor){
-    fila->lista[fila->fim] = valor;
-    fila->fim = (fila->fim+1)%50;
+    if(fila->n < 50){
+        fila->lista[(fila->ini + fila->n)%50] = valor;
+        fila->n++;
+    }
 }
 
 int fila_retira(Fila *fila){
     int v;
-    if(fila->fim != 0){
+    if(fila->n > 0){
         v = fila->lista[fila->ini];
         fila->lista[fila->ini] = 0;
         fila->ini = (fila->ini+1)%50;
+        fila->n--;
     }
     return v;
 }
@@ -30,36 +33,36 @@ int fila_frente(Fila *fila){
 }
 
 bool fila_vazia(Fila *fila){
-    return(fila->fim == fila->ini);
+    return(fila->n == 0);
 }
 
 void fila_imprime(Fila *fila){
     int i = fila->ini;
     putchar('\n');
-    while(i != fila->fim){
+    while(i != fila->ini + fila->n){
         printf("%d\n", fila->lista[i%50]);
-        i = (i+1)%50;
+        i++;
     }
 }
 
 void fila_combina(Fila* f1, Fila* f2, Fila* fres){
     fres->ini = 0;
-    fres->fim = 0;
+    fres->n = 0;
     int i;
     i = f1->ini;
-    while(i != f1->fim){
-        fres->lista[fres->fim] = f1->lista[i];
-        i = (i+1)%50;
-        fres->fim = (fres->fim+1)%50;
+    while(i != f1->ini + f1->n && fres->n < 50){
+        fres->lista[fres->n] = f1->lista[i%50];
+        i++;
+        fres->n++;
     }
     i = f2->ini;
-    while(i != f2->fim){
-        fres->lista[fres->fim] = f2->lista[i];
-        i = (i+1)%50;
-        fres->fim = (fres->fim+1)%50;
+    while(i != f2->ini + f2->n && fres->n < 50){
+        fres->lista[fres->n] = f2->lista[i%50];
+        i++;
+        fres->n++;
     }
     f1->ini = 0;
-    f1->fim = 0;
+    f1->n = 0;
     f2->ini = 0;
-    f2->fim = 0;
+    f2->n = 0;
 }
