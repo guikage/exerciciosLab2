@@ -94,7 +94,8 @@ void encerraLocacao(LLocacoes *l){
         printf("Data informada antecede a data de retirada.\n");
         loc->dfin = pegaData();
     }
-    loc->vtotal = (difdata(loc->dini, loc->dfin) + 1) * loc->carro->valorDiaria;
+    loc->vtotal = difdata(loc->dini, loc->dfin) * loc->carro->valorDiaria;
+    if(loc->vtotal < loc->carro->valorDiaria) loc->vtotal = loc->carro->valorDiaria;
     printf("Digite a quilometragem atual do carro:\n");
     scanf(" %f", &loc->carro->quilometragem);
 }

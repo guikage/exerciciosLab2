@@ -1,3 +1,6 @@
+Trabalho 3 Lab Prog
+Guilherme Meneghetti Einloft
+
 Requisitos:
 Incluir e listar veículos: [X]
 - Guardar placa, marca, modelo, ano, quilometragem, valor da diaria e flag disponibilidade: [X]
@@ -24,7 +27,7 @@ Relatórios:
 Observações importantes:
 - Listas encadeadas: [X]
 - Menu: [X]
-- Structs alocadas dinamicamente: [?] (apenas datas não alocadas)
+- Structs alocadas dinamicamente: [X] (apenas datas não alocadas)
 - Múltiplos arquivos: [X]
 - Funções e passagem de parâmetros: [X]
 - Não utilizar variáveis globais: [X]

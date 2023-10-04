@@ -15,6 +15,7 @@ bool menuRelatorios(LCarros *lcarros, LClientes *lclientes, LLocacoes *llocacoes
     printf("3. Listar faturamento mensal\n");
     printf("4. Listar veiculos mais rodados\n");
     printf("5. Listar veiculos disponiveis\n");
+    printf("0. Voltar\n");
     printf("\nDigite a opcao desejada: ");
     scanf("%d", &opcao);
     switch(opcao){
@@ -76,8 +77,7 @@ bool menu(LCarros **lcarros, LClientes **lclientes, LLocacoes **llocacoes){
             listaLocacoes(*llocacoes);
             break;
         case 8:
-            while(!menuRelatorios(*lcarros, *lclientes, *llocacoes)){
-            }
+            while(!menuRelatorios(*lcarros, *lclientes, *llocacoes)){}
             break;
         default:
             return true;
