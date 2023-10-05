@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1696344946 source:c:\users\ufsm\documents\trees\trees\main.c
+	<stdio.h>
+	<stdlib.h>
+	"trees.h"
+
+1696344727 c:\users\ufsm\documents\trees\trees\trees.h
+
+1696344737 source:c:\users\ufsm\documents\trees\trees\trees.c
+	<stdio.h>
+	<stdlib.h>
+	"trees.h"
+
+1696515619 source:c:\users\ufsm\downloads\trees\trees.c
+	<stdio.h>
+	<stdlib.h>
+	"trees.h"
+
+1696515073 c:\users\ufsm\downloads\trees\trees.h
+
+1696515132 source:c:\users\ufsm\downloads\trees\main.c
+	<stdio.h>
+	<stdlib.h>
+	"trees.h"
+
